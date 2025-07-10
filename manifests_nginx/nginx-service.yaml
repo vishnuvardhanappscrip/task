@@ -1,0 +1,16 @@
+# nginx-service.yaml (For Application Load Balancer)
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-alb-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-type: "alb"
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
